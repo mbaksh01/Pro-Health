@@ -1,3 +1,27 @@
+:root {
+    --theme-primary: #904B94;
+    --theme-secondary: #CC568C;
+    --theme-tertiary: #FF9867;
+}
+
+* {
+    font-family: Microsoft YaHei;
+    box-sizing: border-box;
+}
+
+p {
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+}
+
+#app {
+    height: 100%;
+}
+
 h1:focus {
     outline: none;
 }
