@@ -1,0 +1,21 @@
+﻿.search-options {
+    display: grid;
+    grid-template-columns: 1.25fr 1.25fr 1fr 2fr;
+    grid-gap: 0.75rem;
+    margin: 1rem;
+}
+
+    .search-options > p {
+        color: var(--theme-primary);
+        margin: 0.3rem 0;
+    }
+
+    .search-options > input {
+        padding: 0.25rem;
+        border-color: #797979;
+        border-radius: 5px;
+        border-width: 1px;
+        width: 100%;
+        font-size: 14px;
+        margin: auto;
+    }
