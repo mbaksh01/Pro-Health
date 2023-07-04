@@ -1,0 +1,8 @@
+﻿.home-content-container {
+    margin-left: 1rem;
+    color: var(--theme-primary);
+}
+
+.home-content-container > h1 {
+    font-weight: 400;
+}
