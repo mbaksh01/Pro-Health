@@ -1,0 +1,25 @@
+﻿<table>
+    <tr>
+        <th></th>
+        @foreach (var header in Headers)
+        {
+            <th>@header</th>
+        }
+    </tr>
+    @for (int y = 0; y < Rows.Length; y++)
+    {
+        <tr>
+            <td>@(y + 1)</td>
+            @for (int x = 0; x < Rows[y].Length; x++)
+            {
+                <td>@Rows[y][x]</td>
+            }
+        </tr>
+    }
+</table>
+
+@code {
+    [Parameter] public string[] Headers { get; set; } = Array.Empty<string>();
+
+    [Parameter] public string[][] Rows { get; set; } = new string[0][];
+}
