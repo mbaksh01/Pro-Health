@@ -1,0 +1,57 @@
+﻿@page "/medical-records/search/history"
+
+<PageTitle>Pro-Health - Medical Records - Search History</PageTitle>
+
+<Breadcrumbs Crumbs="breadcrumbs" />
+
+<div class="table-container">
+    <Table Headers="headers" Rows="rows" />
+</div>
+
+@code {
+    Breadcrumb[] breadcrumbs = Array.Empty<Breadcrumb>();
+
+    string[] headers = Array.Empty<string>();
+
+    string[][] rows = new string[0][];
+
+    protected override void OnInitialized()
+    {
+        breadcrumbs = new Breadcrumb[]
+        {
+            new()
+            {
+                Name = "Medical Records",
+                Link = "/medical-records"
+            },
+            new()
+            {
+                Name = "Search",
+                Link = "/medical-records/search"
+            },
+            new()
+            {
+                Name = "History",
+                Link = "/medical-records/search/history"
+            },
+        };
+
+        headers = new[]
+        {
+            "Family Name",
+            "Search Date",
+            "Time",
+        };
+
+        rows = new string[][]
+        {
+            new[] { "Graham", "Friday, 24 Apr 1998", "20:18" },
+            new[] { "Graham1", "Friday, 24 Apr 1998", "20:18" },
+            new[] { "Graham2", "Friday, 24 Apr 1998", "20:18" },
+            new[] { "Graham3", "Friday, 24 Apr 1998", "20:18" },
+            new[] { "Graham4", "Friday, 24 Apr 1998", "20:18" },
+        };
+
+        base.OnInitialized();
+    }
+}
