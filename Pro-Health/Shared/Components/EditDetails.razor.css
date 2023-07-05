@@ -1,0 +1,31 @@
+﻿h3 {
+    margin: 0;
+}
+
+p {
+    margin: 0.75rem 0;
+    color: #333;
+}
+
+h3, p {
+    color: #333;
+}
+
+.edit-details-container {
+    width: 100%;
+}
+
+.edit-details-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .edit-details-header > svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+.edit-details-properties {
+    display: flex;
+    justify-content: space-between;
+}

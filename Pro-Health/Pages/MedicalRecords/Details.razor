@@ -1,0 +1,48 @@
+﻿@page "/medical-records/details"
+
+<Breadcrumbs />
+
+<div class="main-container">
+    <div class="main-details">
+        <div class="column-1">
+            <EditDetails Title="General" FiledValues="_fieldValues"></EditDetails>
+            <EditDetails Title="General" FiledValues="_fieldValues"></EditDetails>
+        </div>
+        <div>
+            <EditDetails Title="General" FiledValues="_fieldValues"></EditDetails>
+        </div>
+        <div class="column-3">
+            <h3>Notes</h3>
+            <textarea />
+        </div>
+    </div>
+    <div class="lab-results">
+
+    </div>
+</div>
+
+@code {
+    FieldValue[] _fieldValues = new FieldValue[]
+    {
+        new()
+        {
+            Field = "Family Name",
+            Value = "Graham"
+        },
+        new()
+        {
+            Field = "Forename",
+            Value = "Elsie"
+        },
+        new()
+        {
+            Field = "Date of Birth",
+            Value = "Friday, 24 Apr 1998"
+        },
+        new()
+        {
+            Field = "Gender",
+            Value = "Famale"
+        },
+    };
+}
