@@ -1,9 +1,11 @@
 ﻿h3 {
     margin: 0;
+    margin-bottom: .75rem;
 }
 
 p {
-    margin: 0.75rem 0;
+    padding: .25rem 0;
+    /* border-bottom: 1px #aaa solid; */
     color: #333;
 }
 
@@ -26,6 +28,15 @@ h3, p {
     }
 
 .edit-details-properties {
-    display: flex;
-    justify-content: space-between;
+}
+
+.edit-details-rows {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+    row-gap: 0.5rem;
+}
+
+.edit-details-values > input {
+    margin: .5rem 0;
 }

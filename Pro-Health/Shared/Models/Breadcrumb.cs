@@ -1,6 +1,6 @@
 ﻿namespace ProHealth.Shared.Models;
 
-public sealed class Breadcrumb
+public sealed partial class Breadcrumb
 {
     public string Name { get; set; }
 

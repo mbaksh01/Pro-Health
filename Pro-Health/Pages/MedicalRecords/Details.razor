@@ -1,28 +1,43 @@
 ﻿@page "/medical-records/details"
 
-<Breadcrumbs />
+<Breadcrumbs Crumbs="_breadcrumbs" />
 
 <div class="main-container">
     <div class="main-details">
         <div class="column-1">
-            <EditDetails Title="General" FiledValues="_fieldValues"></EditDetails>
-            <EditDetails Title="General" FiledValues="_fieldValues"></EditDetails>
+            <div>
+                <EditDetails Title="General" FieldValues="_generalValues" ValueChanged="DoShit"></EditDetails>
+            </div>
+            <div>
+                <EditDetails Title="Address" FieldValues="_addressValues"></EditDetails>
+            </div>
         </div>
         <div>
-            <EditDetails Title="General" FiledValues="_fieldValues"></EditDetails>
+            <EditDetails Title="Contact Information" FieldValues="_contactInfoValues"></EditDetails>
         </div>
         <div class="column-3">
             <h3>Notes</h3>
-            <textarea />
+            <textarea name="notes-input" />
         </div>
     </div>
+    <hr />
     <div class="lab-results">
-
+        <h3>Lab Results</h3>
+        <div class="results-container">
+            <div>
+                <h4>New Results</h4>
+                <Table Headers="_resultsHeaders" Rows="_newResults"></Table>
+            </div>
+            <div>
+                <h4>Pending Results</h4>
+                <Table Headers="_resultsHeaders" Rows="_pendingResults"></Table>
+            </div>
+        </div>
     </div>
 </div>
 
 @code {
-    FieldValue[] _fieldValues = new FieldValue[]
+    FieldValue[] _generalValues = new FieldValue[]
     {
         new()
         {
@@ -45,4 +60,120 @@
             Value = "Famale"
         },
     };
+
+    FieldValue[] _addressValues = new FieldValue[]
+    {
+        new()
+        {
+            Field = "House Name / Number",
+            Value = "55"
+        },
+        new()
+        {
+            Field = "Adderss Line 1",
+            Value = "George Street"
+        },
+        new()
+        {
+            Field = "Adderss Line 2",
+            Value = "-"
+        },
+        new()
+        {
+            Field = "City",
+            Value = "Newcastel Upon Tyne"
+        },
+        new()
+        {
+            Field = "County / Region",
+            Value = "Northumberland"
+        },
+        new()
+        {
+            Field = "Postcode",
+            Value = "NE46 6PF"
+        },
+        new()
+        {
+            Field = "Country",
+            Value = "England"
+        },
+    };
+
+    FieldValue[] _contactInfoValues = new FieldValue[]
+    {
+        new()
+        {
+            Field = "Phone Number",
+            Value = "+44 7700900448"
+        },
+        new()
+        {
+            Field = "Home Number",
+            Value = "0115 496 0722"
+        },
+        new()
+        {
+            Field = "Next of Kin Name",
+            Value = "Nixon Graham"
+        },
+        new()
+        {
+            Field = "Next of Kin Relation",
+            Value = "Farther"
+        },
+        new()
+        {
+            Field = "Next of Kin Primary Contact",
+            Value = "+44 7725 953657"
+        },
+        new()
+        {
+            Field = "Next of Kin Secondary Contact",
+            Value = "+44 7725 953657"
+        },
+    };
+
+    string[] _resultsHeaders = new[]
+    {
+        "Type",
+        "Request Reason",
+        "ETA",
+        "Request Date",
+    };
+
+    string[][] _newResults = new string[][]
+    {
+        new[] { "-", "-", "-", "-" },
+    };
+
+    string[][] _pendingResults = new string[][]
+    {
+        new[] { "Blood", "Blood Sugar Levels", "Tomorrow", "Three days ago" },
+        new[] { "Urine", "Kidney Function", "1st July", "One day ago" },
+    };
+
+    Breadcrumb[] _breadcrumbs = new Breadcrumb[]
+    {
+        new()
+        {
+            Name = "Medical Records",
+            Link = "/"
+        },
+        new()
+        {
+            Name = "Details",
+            Link = "/medical-records/details"
+        },
+        new()
+        {
+            Name = "Graham, Elsie",
+            Link = "/medical-records/details"
+        },
+    };
+
+    void DoShit()
+    {
+        Console.WriteLine(_generalValues[0]);
+    }
 }

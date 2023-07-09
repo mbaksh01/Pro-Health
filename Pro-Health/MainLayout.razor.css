@@ -4,9 +4,10 @@
 
 .top-bar {
     height: clamp(50px, 10%, 100px);
-    background-color: var(--theme-primary);
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    background-color: var(--theme-primary);
 }
 
     .top-bar > p {
@@ -22,7 +23,7 @@
 
 .side-bar {
     width: clamp(15rem, 20%, 20rem);
-    height: 100%;
+    min-height: 100vh;
     background: linear-gradient(var(--theme-primary), var(--theme-secondary));
 }
 
