@@ -1,12 +1,15 @@
 ﻿<div class="edit-details-container">
     <div class="edit-details-header">
         <h3>@Title</h3>
-		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="var(--theme-primary)" height="100%" width="100%" version="1.1" id="Capa_1" viewBox="0 0 306.637 306.637" xml:space="preserve" @onclick="EditClick">
-            <g>
-                <path d="M12.809,238.52L0,306.637l68.118-12.809l184.277-184.277l-55.309-55.309L12.809,238.52z M60.79,279.943l-41.992,7.896 l7.896-41.992L197.086,75.455l34.096,34.096L60.79,279.943z" fill="var(--theme-primary)" />
-                <path d="M251.329,0l-41.507,41.507l55.308,55.308l41.507-41.507L251.329,0z M231.035,41.507l20.294-20.294l34.095,34.095 L265.13,75.602L231.035,41.507z" fill="var(--theme-primary)" />
-	        </g>
-        </svg>
+        @if (CanToggleEdit)
+        {
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="var(--theme-primary)" height="100%" width="100%" version="1.1" id="Capa_1" viewBox="0 0 306.637 306.637" xml:space="preserve" @onclick="EditClick">
+                <g>
+                    <path d="M12.809,238.52L0,306.637l68.118-12.809l184.277-184.277l-55.309-55.309L12.809,238.52z M60.79,279.943l-41.992,7.896 l7.896-41.992L197.086,75.455l34.096,34.096L60.79,279.943z" fill="var(--theme-primary)" />
+                    <path d="M251.329,0l-41.507,41.507l55.308,55.308l41.507-41.507L251.329,0z M231.035,41.507l20.294-20.294l34.095,34.095 L265.13,75.602L231.035,41.507z" fill="var(--theme-primary)" />
+                </g>
+            </svg>
+        }
     </div>
     <div class="edit-details-properties">
         <div class="edit-details-rows">
@@ -15,7 +18,14 @@
                 <p>@fieldValue.Field</p>
                 @if (_editing)
                 {
-                    <input type="text" @bind="fieldValue.Value" />
+                    @if (fieldValue.Field.Contains("Date"))
+                    {
+                        <input type="date" @onchange="@(args => fieldValue.Value = args.Value?.ToString())" />
+                    }
+                    else
+                    {
+                        <input type="text" @bind="fieldValue.Value"/>
+                    }
                 }
                 else
                 {
@@ -31,7 +41,7 @@
 
     [Parameter] public string Title { get; set; } = "Details";
 
-    private IEnumerable<FieldValue> _currentFieldValues = Enumerable.Empty<FieldValue>();    
+    private IEnumerable<FieldValue> _currentFieldValues = Enumerable.Empty<FieldValue>();
 
     [Parameter] public IEnumerable<FieldValue> FieldValues { get; set; } = Enumerable.Empty<FieldValue>();
 
@@ -41,11 +51,13 @@
         set => _editing = value;
     }
 
+    [Parameter] public bool CanToggleEdit { get; set; } = true;
+
     [Parameter] public EventCallback ValueChanged { get; set; }
 
     protected override void OnInitialized()
     {
-        _currentFieldValues = FieldValues.ToArray();
+        _currentFieldValues = FieldValues.ToList();
 
         base.OnInitialized();
     }
@@ -62,26 +74,6 @@
 
     private Task InvokeIfChanged()
     {
-        if (ReferenceEquals(_currentFieldValues, FieldValues))
-        {
-            Console.WriteLine("Ref Bad");
-        }
-
-        if (_currentFieldValues.First().Value == FieldValues.First().Value)
-        {
-            Console.WriteLine("Val Bad");
-        }
-
-        var combinedList = _currentFieldValues.Zip(FieldValues);
-
-        foreach ((FieldValue current, FieldValue modified) in combinedList)
-        {
-            if (!current.Equals(modified))
-            {
-                return ValueChanged.InvokeAsync();
-            }
-        }
-
-        return Task.CompletedTask;
+        return ValueChanged.InvokeAsync();
     }
 }
