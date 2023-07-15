@@ -1,5 +1,7 @@
 ﻿main {
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .top-bar {
@@ -8,12 +10,13 @@
     align-items: center;
     justify-content: space-between;
     background-color: var(--theme-primary);
+    padding: 0 1rem;
 }
 
     .top-bar > p {
-        margin: 0 2.5rem;
+        margin: 0 1.5rem;
         color: white;
-        font-size: 2rem;
+        font-size: 2.5rem;
     }
 
 .side-bar-content-container {
@@ -23,11 +26,25 @@
 
 .side-bar {
     width: clamp(15rem, 20%, 20rem);
-    min-height: 100vh;
+    min-width: 3rem;
+    min-height: 4rem;
     background: linear-gradient(var(--theme-primary), var(--theme-secondary));
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    transition: width ease-in-out 0.5s;
 }
+
+    .side-bar > svg {
+        margin: 1rem;
+        cursor: pointer;
+    }
 
 .body-container {
     margin: 1rem;
     flex-grow: 1;
+}
+
+.rotate {
+    transform: rotate(180deg);
 }

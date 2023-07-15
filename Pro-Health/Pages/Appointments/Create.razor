@@ -1,0 +1,38 @@
+﻿@page "/appointments/create"
+
+<PageTitle>Pro-Health - Appointments - Create</PageTitle>
+
+<Breadcrumbs Crumbs="breadcrumbs"></Breadcrumbs>
+
+<div class="main-container">
+    <div class="edit-details-container">
+        <EditDetails CanToggleEdit="false" Editing="true" Title="Details" FieldValues="fieldValues"></EditDetails>
+    </div>
+    <div class="notes-container">
+        <h3>Notes</h3>
+        <textarea></textarea>
+    </div>
+    <div class="buttons-container">
+        <Button>Cancel</Button>
+        <Button Colour="ButtonColour.Orange">Book</Button>
+    </div>
+</div>
+
+@code {
+    Breadcrumb[] breadcrumbs =
+    {
+        new() { Name = "Appointments", Link = "" },
+        new() { Name = "Create", Link = "/appointments/create" },
+    };
+
+    List<FieldValue> fieldValues = new()
+    {
+        new() { Field = "Patient" },
+        new() { Field = "Date of Appointment" },
+        new() { Field = "Time of Appointment" },
+        new() { Field = "Reason" },
+        new() { Field = "Other Reason" },
+        new() { Field = "Clinic" },
+        new() { Field = "Seeing" },
+    };
+}

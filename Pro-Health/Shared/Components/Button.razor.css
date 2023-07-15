@@ -1,0 +1,22 @@
+﻿.button {
+    border-radius: 4px;
+    padding: .5rem 1rem;
+    border: 1px #797979 solid;
+}
+
+    .button:not(:last-child) {
+        margin-right: 1rem;
+    }
+
+    .button > p {
+        font-weight: bold;
+    }
+
+.orange {
+    background-color: var(--theme-tertiary);
+    border: 1px var(--theme-tertiary) solid !important;
+}
+
+    .orange > p {
+        color: white;
+    }

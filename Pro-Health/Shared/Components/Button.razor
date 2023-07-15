@@ -1,0 +1,18 @@
+﻿<div class="button @AddColourClass()">
+    <p>@ChildContent</p>
+</div>
+
+@code {
+    [Parameter] public ButtonColour Colour { get; set; } = ButtonColour.Default;
+
+    [Parameter] public RenderFragment ChildContent { get; set; } = default!;
+
+    string AddColourClass()
+    {
+        return Colour switch
+        {
+            ButtonColour.Orange => "orange",
+            _ => "",
+        };
+    }
+}

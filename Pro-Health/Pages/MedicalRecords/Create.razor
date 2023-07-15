@@ -1,5 +1,9 @@
 ﻿@page "/medical-records/create"
 
+<PageTitle>Pro-Health - Medical Records - Create</PageTitle>
+
+<Breadcrumbs Crumbs="breadcrumbs"></Breadcrumbs>
+
 <div class="main-container">
     <div class="main-details">
         <div class="column-1">
@@ -20,22 +24,22 @@
     </div>
     <div class="buttons-container">
         <div>
-            <div class="button orange">
-                <p>Import</p>
-            </div>
+            <Button Colour="ButtonColour.Orange">Import</Button>
         </div>
         <div class="buttons-container-save-cancel">
-            <div class="button">
-                <p>Cancel</p>
-            </div>
-            <div class="button orange">
-                <p>Save</p>
-            </div>
+            <Button>Cancel</Button>
+            <Button Colour="ButtonColour.Orange">Save</Button>
         </div>
     </div>
 </div>
 
 @code {
+    Breadcrumb[] breadcrumbs =
+    {
+        new() { Name = "Medical Records", Link = "" },
+        new() { Name = "Create", Link = "/medical-records/create" },
+    };
+
     FieldValue[] _generalValues = new FieldValue[]
     {
         new()

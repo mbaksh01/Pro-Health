@@ -18,9 +18,17 @@
                 <p>@fieldValue.Field</p>
                 @if (_editing)
                 {
-                    @if (fieldValue.Field.Contains("Date"))
+                    @if (fieldValue.Field.ToLower().Contains("date") && fieldValue.Field.ToLower().Contains("time"))
+                    {
+                        <input type="datetime" @onchange="@(args => fieldValue.Value = args.Value?.ToString())" />
+                    }
+                    else if (fieldValue.Field.ToLower().Contains("date"))
                     {
                         <input type="date" @onchange="@(args => fieldValue.Value = args.Value?.ToString())" />
+                    }
+                    else if (fieldValue.Field.ToLower().Contains("time"))
+                    {
+                        <input type="time" @onchange="@(args => fieldValue.Value = args.Value?.ToString())" />
                     }
                     else
                     {

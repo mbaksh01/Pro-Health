@@ -1,0 +1,23 @@
+﻿.date-range-container {
+    margin: 1rem;
+    margin-right: auto;
+    display: flex;
+    justify-content: flex-start;
+}
+
+    .date-range-container > input {
+        padding: 0.25rem;
+        border-color: #797979;
+        border-radius: 5px;
+        border-width: 1px;
+        width: 15rem;
+        font-size: 14px;
+    }
+
+        .date-range-container > input:not(:last-child) {
+            margin-right: 1rem;
+        }
+
+.table-container {
+    margin: 1rem;
+}

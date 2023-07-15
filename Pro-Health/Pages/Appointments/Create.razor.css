@@ -1,0 +1,23 @@
+﻿.main-container {
+    width: 100%;
+    border: 1px var(--theme-tertiary) solid;
+    border-radius: 10px;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+
+.edit-details-container {
+    width: 40rem;
+}
+
+.notes-container > textarea {
+    width: 100%;
+    min-height: 10rem;
+    margin-bottom: 1rem;
+}
+
+.buttons-container {
+    width: fit-content;
+    display: flex;
+    margin-left: auto;
+}
