@@ -1,4 +1,5 @@
 ﻿@page "/medical-records/details"
+@page "/medical-records/details/{Id:guid}"
 
 <PageTitle>Pro-Health - Medical Records - Details</PageTitle>
 
@@ -8,7 +9,7 @@
     <div class="main-details">
         <div class="column-1">
             <div>
-                <EditDetails Title="General" FieldValues="_generalValues" ValueChanged="DoShit"></EditDetails>
+                <EditDetails Title="General" FieldValues="_generalValues" ValueChanged="Update"></EditDetails>
             </div>
             <div>
                 <EditDetails Title="Address" FieldValues="_addressValues"></EditDetails>
@@ -19,7 +20,7 @@
         </div>
         <div class="column-3">
             <h3>Notes</h3>
-            <textarea name="notes-input" />
+            <textarea name="notes-input" @bind="_medicalRecord.Notes" />
         </div>
     </div>
     <hr />
@@ -37,145 +38,3 @@
         </div>
     </div>
 </div>
-
-@code {
-    FieldValue[] _generalValues = new FieldValue[]
-    {
-        new()
-        {
-            Field = "Family Name",
-            Value = "Graham"
-        },
-        new()
-        {
-            Field = "Forename",
-            Value = "Elsie"
-        },
-        new()
-        {
-            Field = "Date of Birth",
-            Value = "Friday, 24 Apr 1998"
-        },
-        new()
-        {
-            Field = "Gender",
-            Value = "Famale"
-        },
-    };
-
-    FieldValue[] _addressValues = new FieldValue[]
-    {
-        new()
-        {
-            Field = "House Name / Number",
-            Value = "55"
-        },
-        new()
-        {
-            Field = "Adderss Line 1",
-            Value = "George Street"
-        },
-        new()
-        {
-            Field = "Adderss Line 2",
-            Value = "-"
-        },
-        new()
-        {
-            Field = "City",
-            Value = "Newcastel Upon Tyne"
-        },
-        new()
-        {
-            Field = "County / Region",
-            Value = "Northumberland"
-        },
-        new()
-        {
-            Field = "Postcode",
-            Value = "NE46 6PF"
-        },
-        new()
-        {
-            Field = "Country",
-            Value = "England"
-        },
-    };
-
-    FieldValue[] _contactInfoValues = new FieldValue[]
-    {
-        new()
-        {
-            Field = "Phone Number",
-            Value = "+44 7700900448"
-        },
-        new()
-        {
-            Field = "Home Number",
-            Value = "0115 496 0722"
-        },
-        new()
-        {
-            Field = "Next of Kin Name",
-            Value = "Nixon Graham"
-        },
-        new()
-        {
-            Field = "Next of Kin Relation",
-            Value = "Farther"
-        },
-        new()
-        {
-            Field = "Next of Kin Primary Contact",
-            Value = "+44 7725 953657"
-        },
-        new()
-        {
-            Field = "Next of Kin Secondary Contact",
-            Value = "+44 7725 953657"
-        },
-    };
-
-    string[] _resultsHeaders = new[]
-    {
-        "Type",
-        "Request Reason",
-        "ETA",
-        "Request Date",
-    };
-
-    string[][] _newResults = new string[][]
-    {
-        new[] { "-", "-", "-", "-" },
-    };
-
-    string[][] _pendingResults = new string[][]
-    {
-        new[] { "Blood", "Blood Sugar Levels", "Tomorrow", "Three days ago" },
-        new[] { "Urine", "Kidney Function", "1st July", "One day ago" },
-    };
-
-    Breadcrumb[] _breadcrumbs = new Breadcrumb[]
-    {
-        new()
-        {
-            Name = "Medical Records",
-            Link = "/"
-        },
-        new()
-        {
-            Name = "Details",
-            Link = "/medical-records/details"
-        },
-        new()
-        {
-            Name = "Graham, Elsie",
-            Link = "/medical-records/details"
-        },
-    };
-
-    void DoShit()
-    {
-        Console.WriteLine(_generalValues[0].Value);
-    }
-}

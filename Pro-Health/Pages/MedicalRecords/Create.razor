@@ -8,18 +8,30 @@
     <div class="main-details">
         <div class="column-1">
             <div>
-                <EditDetails Title="General" FieldValues="_generalValues" CanToggleEdit="false" Editing="true"></EditDetails>
+                <EditDetails
+                    Title="General"
+                    FieldValues="_generalValues"
+                    CanToggleEdit="false"
+                    Editing="true" />
             </div>
             <div>
-                <EditDetails Title="Address" FieldValues="_addressValues" CanToggleEdit="false" Editing="true"></EditDetails>
+                <EditDetails
+                    Title="Address"
+                    FieldValues="_addressValues"
+                    CanToggleEdit="false"
+                    Editing="true" />
             </div>
         </div>
         <div>
-            <EditDetails Title="Contact Information" FieldValues="_contactInfoValues" CanToggleEdit="false" Editing="true"></EditDetails>
+            <EditDetails
+                Title="Contact Information"
+                FieldValues="_contactInfoValues"
+                CanToggleEdit="false"
+                Editing="true" />
         </div>
         <div class="column-3">
             <h3>Notes</h3>
-            <textarea name="notes-input" />
+            <textarea name="notes-input" @bind="_medicalRecord.Notes" />
         </div>
     </div>
     <div class="buttons-container">
@@ -27,113 +39,8 @@
             <Button Colour="ButtonColour.Orange">Import</Button>
         </div>
         <div class="buttons-container-save-cancel">
-            <Button>Cancel</Button>
-            <Button Colour="ButtonColour.Orange">Save</Button>
+            <Button Clicked="Cancel">Cancel</Button>
+            <Button Colour="ButtonColour.Orange" Clicked="Save">Save</Button>
         </div>
     </div>
 </div>
-
-@code {
-    Breadcrumb[] breadcrumbs =
-    {
-        new() { Name = "Medical Records", Link = "" },
-        new() { Name = "Create", Link = "/medical-records/create" },
-    };
-
-    FieldValue[] _generalValues = new FieldValue[]
-    {
-        new()
-        {
-            Field = "Family Name",
-            Value = string.Empty
-        },
-        new()
-        {
-            Field = "Forename",
-            Value = string.Empty
-        },
-        new()
-        {
-            Field = "Date of Birth",
-            Value = string.Empty
-        },
-        new()
-        {
-            Field = "Gender",
-            Value = string.Empty
-        },
-    };
-
-    FieldValue[] _addressValues = new FieldValue[]
-    {
-        new()
-        {
-            Field = "House Name / Number",
-            Value = string.Empty
-        },
-        new()
-        {
-            Field = "Adderss Line 1",
-            Value = string.Empty
-        },
-        new()
-        {
-            Field = "Adderss Line 2",
-            Value = string.Empty
-        },
-        new()
-        {
-            Field = "City",
-            Value = string.Empty
-        },
-        new()
-        {
-            Field = "County / Region",
-            Value = string.Empty
-        },
-        new()
-        {
-            Field = "Postcode",
-            Value = string.Empty
-        },
-        new()
-        {
-            Field = "Country",
-            Value = string.Empty
-        },
-    };
-
-    FieldValue[] _contactInfoValues = new FieldValue[]
-    {
-        new()
-        {
-            Field = "Phone Number",
-            Value = string.Empty
-        },
-        new()
-        {
-            Field = "Home Number",
-            Value = string.Empty
-        },
-        new()
-        {
-            Field = "Next of Kin Name",
-            Value = string.Empty
-        },
-        new()
-        {
-            Field = "Next of Kin Relation",
-            Value = string.Empty
-        },
-        new()
-        {
-            Field = "Next of Kin Primary Contact",
-            Value = string.Empty
-        },
-        new()
-        {
-            Field = "Next of Kin Secondary Contact",
-            Value = string.Empty
-        },
-    };
-}

@@ -6,20 +6,92 @@
             <th>@header</th>
         }
     </tr>
-    @for (int y = 0; y < Rows.Length; y++)
+    @if (Rows.Length > 0)
     {
-        <tr>
-            <td>@(y + 1)</td>
-            @for (int x = 0; x < Rows[y].Length; x++)
-            {
-                <td>@Rows[y][x]</td>
-            }
-        </tr>
+        @for (int y = (currentPage - 1) * pageSize; y < ((currentPage - 1) * pageSize + (currentPage == pages ? remainder : pageSize)); y++)
+        {
+            <tr>
+                <td>@(y + 1)</td>
+                @for (int x = 0; x < Rows[y].Length; x++)
+                {
+                    int yCopy = y;
+                    @if (x == 0)
+                    {
+                        <td @onclick="() => RowClicked.InvokeAsync(yCopy)">@Rows[y][x]</td>
+                    }
+                    else
+                    {
+                        <td>@Rows[y][x]</td>
+                    }
+                }
+            </tr>
+        }
     }
 </table>
+<div class="page-control">
+    <div @onclick="Back" class="back-button">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="2rem" width="2rem" version="1.1" id="Capa_1" viewBox="0 0 155.139 155.139" xml:space="preserve">
+            <g>
+                <polygon points="155.139,77.566 79.18,1.596 79.18,45.978 0,45.978 0,109.155 79.18,109.155 79.18,153.542" />
+            </g>
+        </svg>
+    </div>
+    <div>
+        <p>Page @currentPage of @pages</p>
+    </div>
+    <div @onclick="Next" class="next-button">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="2rem" width="2rem" version="1.1" id="Capa_1" viewBox="0 0 155.139 155.139" xml:space="preserve">
+            <g>
+                <polygon points="155.139,77.566 79.18,1.596 79.18,45.978 0,45.978 0,109.155 79.18,109.155 79.18,153.542" />
+            </g>
+        </svg>
+    </div>
+</div>
 
 @code {
+    int pages;
+    int pageSize = 20;
+    int currentPage = 0;
+    int remainder;
+
     [Parameter] public string[] Headers { get; set; } = Array.Empty<string>();
 
-    [Parameter] public string[][] Rows { get; set; } = new string[0][];
+    [Parameter] public string[][] Rows { get; set; } = Array.Empty<string[]>();
+
+    [Parameter] public EventCallback<int> RowClicked { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        currentPage = 1;
+
+        pages = (int)Math.Ceiling((double)Rows.Length / (double)pageSize);
+
+        remainder = Rows.Length % pageSize;
+
+        base.OnParametersSet();
+    }
+
+    Task Next()
+    {
+        if (currentPage == pages)
+        {
+            return Task.CompletedTask;
+        }
+
+        currentPage++;
+
+        return InvokeAsync(StateHasChanged);
+    }
+
+    Task Back()
+    {
+        if (currentPage == 1)
+        {
+            return Task.CompletedTask;
+        }
+
+        currentPage--;
+
+        return InvokeAsync(StateHasChanged);
+    }
 }

@@ -22,3 +22,27 @@ th {
 td:nth-child(2) {
     cursor: pointer;
 }
+
+.page-control {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25rem;
+}
+
+    .page-control > div {
+        color: var(--theme-tertiary);
+    }
+
+    .page-control > div > p {
+        font-size: 1.25rem;
+        user-select: none;
+    }
+
+.back-button {
+    transform: rotate(180deg);
+}
+
+    .next-button > svg,
+    .back-button > svg {
+        fill: var(--theme-tertiary);
+    }

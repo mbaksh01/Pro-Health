@@ -5,57 +5,12 @@
 <Breadcrumbs Crumbs="breadcrumbs" />
 
 <div class="search-options">
-    <input type="text" placeholder="Enter Patient Family Name" style="grid-column: 1" />
-    <input type="text" placeholder="Enter Patient First Name" style="grid-column: 2" />
-    <input type="date" placeholder="Date Of Birth" style="grid-column: 3" />
+    <input type="text" placeholder="Enter Patient Family Name" style="grid-column: 1" @oninput="FilterByFamilyName" />
+    <input type="text" placeholder="Enter Patient Forename" style="grid-column: 2" @oninput="FilterByForename" />
+    <input type="date" placeholder="Date Of Birth" style="grid-column: 3" @oninput="FilterByDateOfBirth" />
     <p style="grid-column: 4">Click a family name to view the patient's details.</p>
 </div>
 
-<Table Headers="headers" Rows="rows">
-
-</Table>
-
-@code {
-    Breadcrumb[] breadcrumbs = Array.Empty<Breadcrumb>();
-
-    string[] headers = Array.Empty<string>();
-
-    string[][] rows = new string[0][];
-
-    protected override void OnInitialized()
-    {
-        breadcrumbs = new Breadcrumb[]
-        {
-            new()
-            {
-                Name = "Medical Records",
-                Link = "/medical-records"
-            },
-            new()
-            {
-                Name = "Search",
-                Link = "/medical-records/search"
-            },
-        };
-
-        headers = new[]
-        {
-            "Family Name",
-            "Forename",
-            "Date of Birth",
-            "Postcode",
-            "Address"
-        };
-
-        rows = new string[][]
-        {
-            new[] { "Graham", "Elsie", "Friday, 24 Apr 1998", "NE46 6PF", "55 George Street NEWCASTLE UPON TYNE" },
-            new[] { "Graham1", "Elsie", "Friday, 24 Apr 1998", "NE46 6PF", "55 George Street NEWCASTLE UPON TYNE" },
-            new[] { "Graham2", "Elsie", "Friday, 24 Apr 1998", "NE46 6PF", "55 George Street NEWCASTLE UPON TYNE" },
-            new[] { "Graham3", "Elsie", "Friday, 24 Apr 1998", "NE46 6PF", "55 George Street NEWCASTLE UPON TYNE" },
-            new[] { "Graham4", "Elsie", "Friday, 24 Apr 1998", "NE46 6PF", "55 George Street NEWCASTLE UPON TYNE" },
-        };
-
-        base.OnInitialized();
-    }
-}
+<div class="table-container">
+    <Table Headers="headers" Rows="rows" RowClicked="NavigateToSelected" />
+</div>

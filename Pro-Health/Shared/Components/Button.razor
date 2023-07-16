@@ -1,4 +1,4 @@
-﻿<div class="button @AddColourClass()">
+﻿<div class="button @AddColourClass()" @onclick=@(() => Clicked.InvokeAsync())>
     <p>@ChildContent</p>
 </div>
 
@@ -6,6 +6,8 @@
     [Parameter] public ButtonColour Colour { get; set; } = ButtonColour.Default;
 
     [Parameter] public RenderFragment ChildContent { get; set; } = default!;
+
+    [Parameter] public EventCallback Clicked { get; set; }
 
     string AddColourClass()
     {
