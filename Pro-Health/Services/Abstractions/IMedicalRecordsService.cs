@@ -22,6 +22,8 @@ internal interface IMedicalRecordsService
     /// </returns>
     Task<MedicalRecord?> GetByIdAsync(Guid id);
 
+    Task<MedicalRecord?> GetByNameAsync(string name);
+
     /// <summary>
     /// Creates a <see cref="MedicalRecord"/>.
     /// </summary>

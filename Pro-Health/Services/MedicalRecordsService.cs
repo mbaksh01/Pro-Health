@@ -6,8 +6,6 @@ internal class MedicalRecordsService : IMedicalRecordsService
 {
     private IEnumerable<MedicalRecord> _records = Enumerable.Empty<MedicalRecord>();
 
-    private readonly string _storePath = Path.Combine(Environment.CurrentDirectory, "data", "medical-records.json");
-
     private readonly HttpClient _httpClient;
 
     public MedicalRecordsService(HttpClient httpClient)
@@ -43,6 +41,22 @@ internal class MedicalRecordsService : IMedicalRecordsService
         return _records.SingleOrDefault(r => r.Id == id);
     }
 
+    public async Task<MedicalRecord?> GetByNameAsync(string name)
+    {
+        if (!_records.Any())
+        {
+            string response = await _httpClient.GetStringAsync("/data/medical-records.json");
+
+            var records = JsonSerializer.Deserialize<IEnumerable<MedicalRecord>>(response) ?? Enumerable.Empty<MedicalRecord>();
+
+            _records = records;
+        }
+
+        return _records.SingleOrDefault(r => 
+            $"{r.Patient.Forename.ToLower()} {r.Patient.FamilyName.ToLower()}" == name.ToLower()
+        );
+    }
+
     public Task Create(MedicalRecord medicalRecord)
     {
         ArgumentNullException.ThrowIfNull(medicalRecord, nameof(medicalRecord));
@@ -56,7 +70,7 @@ internal class MedicalRecordsService : IMedicalRecordsService
         return Task.CompletedTask;
     }
 
-    public async Task Update(MedicalRecord medicalRecord)
+    public Task Update(MedicalRecord medicalRecord)
     {
         ArgumentNullException.ThrowIfNull(medicalRecord, nameof(medicalRecord));
 
@@ -66,17 +80,18 @@ internal class MedicalRecordsService : IMedicalRecordsService
 
         if (record is null)
         {
-            await Create(medicalRecord);
-            return;
+            return Create(medicalRecord);
         }
 
         recordsList.Remove(record);
         recordsList.Add(medicalRecord);
 
         _records = recordsList;
+
+        return Task.CompletedTask;
     }
 
-    public async Task Delete(Guid id)
+    public Task Delete(Guid id)
     {
         var recordsList = _records.ToList();
 
@@ -84,11 +99,13 @@ internal class MedicalRecordsService : IMedicalRecordsService
 
         if (record is null)
         {
-            return;
+            return Task.CompletedTask;
         }
 
         recordsList.Remove(record);
 
         _records = recordsList;
+
+        return Task.CompletedTask;
     }
 }

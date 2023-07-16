@@ -36,4 +36,15 @@ internal static class Mapper
 
         return medicalRecord;
     }
+
+    public static Appointment MapFields(this Appointment appointment, FieldValue[] fieldValues)
+    {
+        appointment.DateOfAppointment = DateOnly.Parse(fieldValues[1].Value);
+        appointment.TimeOfAppointment = TimeOnly.Parse(fieldValues[2].Value);
+        appointment.Reason = fieldValues[3].Value;
+        appointment.OtherReason = fieldValues[4].Value;
+        appointment.Clinic = fieldValues[5].Value;
+
+        return appointment;
+    }
 }

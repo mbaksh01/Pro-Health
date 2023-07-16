@@ -2,34 +2,13 @@
 
 <PageTitle>Pro-Health - Appointments - Search</PageTitle>
 
-<Breadcrumbs Crumbs="breadcrumbs"></Breadcrumbs>
+<Breadcrumbs Crumbs="_breadcrumbs"></Breadcrumbs>
 
 <div class="date-range-container">
-    <input type="date" />
-    <input type="date" />
+    <input type="date" placeholder="Start Date" @oninput="@(args => Filter("start", args))" />
+    <input type="date" placeholder="End Date" @oninput="@(args => Filter("end", args))" />
 </div>
 
 <div class="table-container">
-    <Table Headers="headers" Rows="rows"></Table>
+    <Table Headers="_headers" Rows="_rows"></Table>
 </div>
-
-@code {
-    Breadcrumb[] breadcrumbs =
-    { 
-        new() { Name = "Appointments", Link = "/" },
-        new() { Name = "Search", Link = "/appointments/search" }
-    };
-
-    string[] headers =
-    {
-        "Family Name",
-        "Forename",
-        "Date Seen",
-        "GP / Nurse Seen",
-    };
-
-    string[][] rows =
-    {
-        new[] { "-", "-", "-", "-", }
-    };
-}

@@ -32,7 +32,7 @@ internal sealed class MedicalRecord
     public string Notes { get; set; } = string.Empty;
 
     [JsonIgnore]
-    public static MedicalRecord Empty = new()
+    public static readonly MedicalRecord Empty = new()
     {
         Id = Guid.NewGuid(),
         Patient = new()

@@ -10,6 +10,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddSingleton(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 builder.Services.AddSingleton<IMedicalRecordsService, MedicalRecordsService>();
+builder.Services.AddSingleton<IAppointmentService, AppointmentService>();
 builder.Services.AddSingleton<IStateService, StateService>();
 
 await builder.Build().RunAsync();
