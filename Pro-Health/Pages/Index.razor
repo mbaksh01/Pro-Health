@@ -16,3 +16,17 @@
     <p>You don't have any pending lab results.</p>
 </div>
 
+@code {
+    [Inject] IMedicalRecordsService MedicalRecordsService { get; set; } = default!;
+
+    [Inject] IStateService StateService { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var medicalRecords = await MedicalRecordsService.GetAllAsync();
+
+        await StateService.SetMedicalRecordAsync(medicalRecords.First());
+
+        await base.OnInitializedAsync();
+    }
+}

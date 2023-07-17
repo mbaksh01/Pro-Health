@@ -16,3 +16,11 @@ export async function open() {
     await new Promise(resolve => setTimeout(resolve, 500));
     sideBar.style.minWidth = "15rem";
 }
+
+export function expand(item) {
+    document.getElementById(item).classList.add("open");
+}
+
+export function collaps(item) {
+    document.getElementById(item).classList.remove("open");
+}

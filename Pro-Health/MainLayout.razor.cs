@@ -9,7 +9,11 @@ public partial class MainLayout : IAsyncDisposable
 
     IJSObjectReference _module = default!;
 
+    Dictionary<string, bool> _menuState = new Dictionary<string, bool>();
+
     [Inject] IJSRuntime JSRuntime { get; set; } = default!;
+
+    [Inject] NavigationManager NavigationManager { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
@@ -29,6 +33,31 @@ public partial class MainLayout : IAsyncDisposable
 
         await _module.InvokeVoidAsync("open");
         _sideBarOpen = true;
+    }
+
+    async Task Toggle(string item)
+    {
+        if (!_menuState.ContainsKey(item))
+        {
+            await _module.InvokeVoidAsync("expand", item);
+            _menuState.Add(item, true);
+            return;
+        }
+
+        if (_menuState[item])
+        {
+            await _module.InvokeVoidAsync("collaps", item);
+            _menuState[item] = false;
+            return;
+        }
+
+        await _module.InvokeVoidAsync("expand", item);
+        _menuState[item] = true;
+    }
+
+    void Navigate(string location)
+    {
+        NavigationManager.NavigateTo(location);
     }
 
     public ValueTask DisposeAsync()
