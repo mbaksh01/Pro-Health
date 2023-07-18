@@ -5,7 +5,14 @@
 <div class="home-content-container">
     <h1>Your Appointments</h1>
 
-    <p>You don't have any upcoming appointments.</p>
+    @if (_rows == Array.Empty<string[]>())
+    {
+        <p>You don't have any upcoming appointments.</p>
+    }
+    else
+    {
+        <Table Headers="_headers" Rows="_rows" />
+    }
 
     <h1>New Lab Results</h1>
 
@@ -17,7 +24,19 @@
 </div>
 
 @code {
+    readonly string[] _headers =
+    {
+        "Family Name",
+        "Forename",
+        "Date Seen",
+        "GP / Nurse Seen",
+    };
+
+    string[][] _rows = Array.Empty<string[]>();
+
     [Inject] IMedicalRecordsService MedicalRecordsService { get; set; } = default!;
+
+    [Inject] IAppointmentService AppointmentService { get; set; } = default!;
 
     [Inject] IStateService StateService { get; set; } = default!;
 
@@ -27,6 +46,38 @@
 
         await StateService.SetMedicalRecordAsync(medicalRecords.First());
 
+        await LoadAppointments();
+
         await base.OnInitializedAsync();
+    }
+
+    async Task LoadAppointments()
+    {
+        var appointments = (await AppointmentService.GetAllAsync())
+            .OrderBy(a => a.DateOfAppointment)
+            .ToList();
+
+        if (!appointments.Any(a => a.DateOfAppointment >= DateOnly.FromDateTime(DateTime.UtcNow)))
+        {
+            return;
+        }
+
+        appointments = appointments
+            .Where(a => a.DateOfAppointment >= DateOnly.FromDateTime(DateTime.UtcNow))
+            .OrderBy(a => a.DateOfAppointment)
+            .ToList();
+
+        _rows = new string[appointments.Count][];
+
+        for (int i = 0; i < appointments.Count; i++)
+        {
+            _rows[i] = new string[]
+            {
+                appointments[i].Patient.FamilyName,
+                appointments[i].Patient.Forename,
+                appointments[i].DateOfAppointment.ToLongDateString(),
+                appointments[i].Seeing is null ? "-" : $"{appointments[i].Seeing!.Forename} {appointments[i].Seeing!.FamilyName}",
+            };
+        }
     }
 }
