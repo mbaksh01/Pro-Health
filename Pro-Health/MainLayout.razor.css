@@ -54,18 +54,18 @@
     margin-bottom: 0.25rem;
 }
 
-    .nav-menu p {
-        user-select: none;
-    }
-
-    .parent > div:first-child {
-        display: flex;
-        align-items: center;
-    }
-
-.parent > div:first-child > p {
-    margin-left: .25rem;
+.nav-menu p {
+    user-select: none;
 }
+
+.parent > div:first-child {
+    display: flex;
+    align-items: center;
+}
+
+    .parent > div:first-child > p {
+        margin-left: .25rem;
+    }
 
 .parent > .child {
     margin-left: 2rem;
@@ -88,4 +88,9 @@
 
 .open > div:last-child {
     display: block;
+}
+
+.parent > div:first-child:hover,
+.child > p:hover {
+    background-color: var(--theme-secondary);
 }

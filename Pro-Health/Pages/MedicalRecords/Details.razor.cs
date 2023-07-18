@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Components;
 using ProHealth.Helpers;
-using ProHealth.Shared.Models;
 
 namespace ProHealth.Pages.MedicalRecords;
 
 public partial class Details : ComponentBase
 {
-    Breadcrumb[] _breadcrumbs = new Breadcrumb[]
+    readonly Breadcrumb[] _breadcrumbs = new Breadcrumb[]
     {
         new()
         {
@@ -30,7 +29,7 @@ public partial class Details : ComponentBase
 
     FieldValue[] _contactInfoValues = default!;
 
-    string[] _resultsHeaders = new[]
+    readonly string[] _resultsHeaders = new[]
     {
         "Type",
         "Request Reason",
@@ -38,12 +37,12 @@ public partial class Details : ComponentBase
         "Request Date",
     };
 
-    string[][] _newResults = new string[][]
+    readonly string[][] _newResults = new string[][]
     {
         new[] { "-", "-", "-", "-" },
     };
 
-    string[][] _pendingResults = new string[][]
+    readonly string[][] _pendingResults = new string[][]
     {
         new[] { "Blood", "Blood Sugar Levels", "Tomorrow", "Three days ago" },
         new[] { "Urine", "Kidney Function", "1st July", "One day ago" },
@@ -57,7 +56,7 @@ public partial class Details : ComponentBase
 
     [Inject] IStateService StateService { get; set; } = default!;
 
-    [Inject] NavigationManager NavigationManager { get; set; } = default!;
+    // [Inject] NavigationManager NavigationManager { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
@@ -69,12 +68,7 @@ public partial class Details : ComponentBase
         }
 
         medicalRecord ??= await MedicalRecordsService.GetByIdAsync(Id);
-
-        if (medicalRecord is null)
-        {
-            NavigationManager.NavigateTo("/");
-            return;
-        }
+        medicalRecord ??= (await MedicalRecordsService.GetAllAsync()).First();
 
         await StateService.SetMedicalRecordAsync(medicalRecord);
 

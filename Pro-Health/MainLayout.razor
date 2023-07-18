@@ -40,7 +40,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="1.5rem" height="1.5rem" viewBox="0 0 24 24">
                             <path d="M9.343 18.657a1 1 0 0 1-.707-1.707l4.95-4.95-4.95-4.95a1 1 0 0 1 1.414-1.414l5.657 5.657a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 0 1-.707.293z" />
                         </svg>
-                        <p @onclick="@(() => Navigate("/appointments"))">Appointments</p>
+                        <p>Appointments</p>
                     </div>
                     <div class="child">
                         <div id="appointments-search-menu" class="parent open">
@@ -51,7 +51,7 @@
                                 <p @onclick="@(() => Navigate("/appointments/search"))">Search</p>
                             </div>
                             <div class="child">
-                                <p @onclick="@(() => Navigate("/appointments/search/history"))">History</p>
+                                <p>History</p>
                             </div>
                         </div>
                         <p @onclick="@(() => Navigate("/appointments/create"))">Create</p>
