@@ -1,0 +1,59 @@
+﻿@page "/login"
+
+<PageTitle>Pro-Health - Login</PageTitle>
+
+<div class="background">
+    <div class="login-modal">
+        <h3>Pro-Health</h3>
+        <div>
+            <input type="text" placeholder="Email" @bind-value="_username" @onkeyup="LoginOnEnter" />
+        </div>
+        <div>
+            <input type="password" placeholder="Password" @bind-value="_password" @onkeyup="LoginOnEnter" />
+        </div>
+        <div class="button-container">
+            <button @onclick="LoginClick">Login</button>
+        </div>
+        @if (!string.IsNullOrEmpty(_authError))
+        {
+            <p class="error-text">@_authError</p>
+        }
+    </div>
+</div>
+
+@code {
+    string _username = string.Empty;
+
+    string _password = string.Empty;
+
+    string _authError = string.Empty;
+
+    [Inject] IAuthenticationService AuthenticationService { get; set; } = default!;
+
+    [Inject] NavigationManager NavigationManager { get; set; } = default!;
+
+    async Task LoginClick()
+    {
+        _authError = string.Empty;
+
+        var response = await AuthenticationService.Authenticate(_username, _password);
+
+        if (response)
+        {
+            NavigationManager.NavigateTo("/");
+            return;
+        }
+
+        _authError = "Invalid username or password.";
+    }
+
+    Task LoginOnEnter(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+        {
+            return LoginClick();
+        }
+
+        return Task.CompletedTask;
+    }
+}

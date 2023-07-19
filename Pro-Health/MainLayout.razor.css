@@ -13,11 +13,24 @@
     padding: 0 1rem;
 }
 
+    .top-bar p {
+        color: white;
+    }
+
     .top-bar > p {
         margin: 0 1.5rem;
-        color: white;
         font-size: 2.5rem;
     }
+
+    .top-bar > div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+        .top-bar > div > svg:first-child {
+            margin-bottom: .25rem;
+        }
 
 .side-bar-content-container {
     display: flex;

@@ -12,5 +12,6 @@ builder.Services.AddSingleton(sp => new HttpClient { BaseAddress = new Uri(build
 builder.Services.AddSingleton<IMedicalRecordsService, MedicalRecordsService>();
 builder.Services.AddSingleton<IAppointmentService, AppointmentService>();
 builder.Services.AddSingleton<IStateService, StateService>();
+builder.Services.AddSingleton<IAuthenticationService, AuthenticationService>();
 
 await builder.Build().RunAsync();
