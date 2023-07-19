@@ -38,7 +38,7 @@
 }
 
 .side-bar {
-    width: clamp(15rem, 20%, 20rem);
+    width: clamp(20rem, 20%, 25rem);
     min-width: 3rem;
     min-height: 4rem;
     background: linear-gradient(var(--theme-primary), var(--theme-secondary));
