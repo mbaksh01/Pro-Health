@@ -3,7 +3,7 @@ using ProHealth.Helpers;
 
 namespace ProHealth.Pages.MedicalRecords;
 
-public partial class Create
+public partial class Create : IDisposable
 {
     Breadcrumb[] breadcrumbs =
     {
@@ -154,5 +154,11 @@ public partial class Create
     void Cancel()
     {
         NavigationManager.NavigateTo("/");
+    }
+
+    public void Dispose()
+    {
+        _medicalRecord = MedicalRecord.Empty;
+        GC.SuppressFinalize(this);
     }
 }
