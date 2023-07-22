@@ -39,8 +39,8 @@ public partial class MainLayout : IAsyncDisposable
     {
         if (!_menuState.ContainsKey(item))
         {
-            await _module.InvokeVoidAsync("expand", item);
-            _menuState.Add(item, true);
+            await _module.InvokeVoidAsync("collaps", item);
+            _menuState.Add(item, false);
             return;
         }
 

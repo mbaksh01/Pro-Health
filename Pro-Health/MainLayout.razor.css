@@ -20,6 +20,8 @@
     .top-bar > p {
         margin: 0 1.5rem;
         font-size: 2.5rem;
+        cursor: pointer;
+        user-select: none;
     }
 
     .top-bar > div {
@@ -106,4 +108,10 @@
 .parent > div:first-child:hover,
 .child > p:hover {
     background-color: var(--theme-secondary);
+}
+
+.parent > div > p,
+.parent > div > svg,
+.child > p {
+    cursor: pointer;
 }
