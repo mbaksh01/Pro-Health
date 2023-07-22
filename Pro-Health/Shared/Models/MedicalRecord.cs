@@ -87,6 +87,8 @@ internal sealed class Person
     [JsonPropertyName("forename")]
     public required string Forename { get; set; }
 
+    public string FullName => $"{Forename} {FamilyName}";
+
     /// <summary>
     /// Date and time of when this person was born.
     /// </summary>

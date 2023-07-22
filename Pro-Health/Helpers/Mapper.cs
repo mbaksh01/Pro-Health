@@ -39,8 +39,8 @@ internal static class Mapper
 
     public static Appointment MapFields(this Appointment appointment, FieldValue[] fieldValues)
     {
-        appointment.DateOfAppointment = DateOnly.Parse(fieldValues[1].Value);
-        appointment.TimeOfAppointment = TimeOnly.Parse(fieldValues[2].Value);
+        appointment.DateOfAppointment = DateOnly.Parse(string.IsNullOrWhiteSpace(fieldValues[1].Value) ? DateTime.UtcNow.AddDays(7).ToString() : fieldValues[1].Value!);
+        appointment.TimeOfAppointment = TimeOnly.Parse(string.IsNullOrWhiteSpace(fieldValues[2].Value) ? "09:00" : fieldValues[2].Value!);
         appointment.Reason = fieldValues[3].Value;
         appointment.OtherReason = fieldValues[4].Value;
         appointment.Clinic = fieldValues[5].Value;

@@ -43,6 +43,11 @@ internal class MedicalRecordsService : IMedicalRecordsService
 
     public async Task<MedicalRecord?> GetByNameAsync(string name)
     {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return null;
+        }
+
         if (!_records.Any())
         {
             string response = await _httpClient.GetStringAsync("/data/medical-records.json");
