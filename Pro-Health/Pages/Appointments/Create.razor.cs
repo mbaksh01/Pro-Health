@@ -18,8 +18,7 @@ public partial class Create
         new() { Field = "Time of Appointment" },
         new() { Field = "Reason" },
         new() { Field = "Other Reason" },
-        new() { Field = "Clinic" },
-        // new() { Field = "Seeing" },
+        new() { Field = "Clinic", Value = "Avenue Medical Practice" },
     };
 
     Appointment _appointment = Appointment.Empty;
@@ -30,9 +29,27 @@ public partial class Create
 
     [Inject] NavigationManager NavigationManager { get; set; } = default!;
 
+    [Parameter] public Guid Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var medicalRecord = await MedicalRecordsService.GetByIdAsync(Id);
+
+        if (medicalRecord is null)
+        {
+            return;
+        }
+
+        _fieldValues[0].Value = medicalRecord.Patient.FullName;
+
+        await base.OnInitializedAsync();
+    }
+
     async Task Save()
     {
         var medicalRecord = await MedicalRecordsService.GetByNameAsync(_fieldValues[0].Value);
+
+        medicalRecord ??= await MedicalRecordsService.GetByIdAsync(Id);
 
         if (medicalRecord is null)
         {

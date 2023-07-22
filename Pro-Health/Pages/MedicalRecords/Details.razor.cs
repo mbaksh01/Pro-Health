@@ -56,7 +56,7 @@ public partial class Details : ComponentBase
 
     [Inject] IStateService StateService { get; set; } = default!;
 
-    // [Inject] NavigationManager NavigationManager { get; set; } = default!;
+    [Inject] NavigationManager NavigationManager { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
@@ -199,5 +199,10 @@ public partial class Details : ComponentBase
         );
 
         _breadcrumbs[2].Name = $"{_medicalRecord.Patient.Forename} {_medicalRecord.Patient.FamilyName}";
+    }
+
+    void BookAppointment()
+    {
+        NavigationManager.NavigateTo($"/appointments/create/{_medicalRecord.Id}");
     }
 }
