@@ -42,9 +42,14 @@ public partial class Search : ComponentBase
 
     async Task NavigateToSelected(int row)
     {
-        Guid id = (await MedicalRecordsService.GetAllAsync()).ToList()[row].Id;
+        var record = await MedicalRecordsService.GetByNameAsync($"{rows[row][1]} {rows[row][0]}");
 
-        NavigationManager.NavigateTo($"/medical-records/details/{id}");
+        if (record is null)
+        {
+            return;
+        }
+
+        NavigationManager.NavigateTo($"/medical-records/details/{record.Id}");
     }
 
     async Task LoadData()
