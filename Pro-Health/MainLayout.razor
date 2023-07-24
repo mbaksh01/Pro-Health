@@ -22,16 +22,16 @@ else
             <div class="side-bar">
                 <div class="nav-menu">
                     <div id="medical-records-menu" class="parent open">
-                        <div @onclick="@(() => Toggle("medical-records-menu"))">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="1.5rem" height="1.5rem" viewBox="0 0 24 24">
+                        <div>
+                            <svg @onclick="@(() => Toggle("medical-records-menu"))" xmlns="http://www.w3.org/2000/svg" fill="#fff" width="1.5rem" height="1.5rem" viewBox="0 0 24 24">
                                 <path d="M9.343 18.657a1 1 0 0 1-.707-1.707l4.95-4.95-4.95-4.95a1 1 0 0 1 1.414-1.414l5.657 5.657a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 0 1-.707.293z" />
                             </svg>
                             <p @onclick="@(() => Navigate(""))">Medical Records</p>
                         </div>
                         <div class="child">
                             <div id="medical-records-search-menu" class="parent open">
-                                <div @onclick="@(() => Toggle("medical-records-search-menu"))">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="1.5rem" height="1.5rem" viewBox="0 0 24 24">
+                                <div>
+                                    <svg @onclick="@(() => Toggle("medical-records-search-menu"))" xmlns="http://www.w3.org/2000/svg" fill="#fff" width="1.5rem" height="1.5rem" viewBox="0 0 24 24">
                                         <path d="M9.343 18.657a1 1 0 0 1-.707-1.707l4.95-4.95-4.95-4.95a1 1 0 0 1 1.414-1.414l5.657 5.657a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 0 1-.707.293z" />
                                     </svg>
                                     <p @onclick="@(() => Navigate("/medical-records/search"))">Search</p>
@@ -45,16 +45,16 @@ else
                         </div>
                     </div>
                     <div id="appointments-menu" class="parent open">
-                        <div @onclick="@(() => Toggle("appointments-menu"))">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="1.5rem" height="1.5rem" viewBox="0 0 24 24">
+                        <div>
+                            <svg @onclick="@(() => Toggle("appointments-menu"))" xmlns="http://www.w3.org/2000/svg" fill="#fff" width="1.5rem" height="1.5rem" viewBox="0 0 24 24">
                                 <path d="M9.343 18.657a1 1 0 0 1-.707-1.707l4.95-4.95-4.95-4.95a1 1 0 0 1 1.414-1.414l5.657 5.657a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 0 1-.707.293z" />
                             </svg>
                             <p @onclick="@(() => Navigate(""))">Appointments</p>
                         </div>
                         <div class="child">
                             <div id="appointments-search-menu" class="parent open">
-                                <div @onclick="@(() => Toggle("appointments-search-menu"))">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="1.5rem" height="1.5rem" viewBox="0 0 24 24">
+                                <div>
+                                    <svg @onclick="@(() => Toggle("appointments-search-menu"))" xmlns="http://www.w3.org/2000/svg" fill="#fff" width="1.5rem" height="1.5rem" viewBox="0 0 24 24">
                                         <path d="M9.343 18.657a1 1 0 0 1-.707-1.707l4.95-4.95-4.95-4.95a1 1 0 0 1 1.414-1.414l5.657 5.657a1 1 0 0 1 0 1.414l-5.657 5.657a1 1 0 0 1-.707.293z" />
                                     </svg>
                                     <p @onclick="@(() => Navigate("/appointments/search"))">Search</p>
